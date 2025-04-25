@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>😄 मज़ेदार दहेज कैलकुलेटर</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      color: #333;
+    }
+    h1 {
+      color: #e60000;
+      text-align: center;
+      background: #fff3cd;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      background-color: #fffaf0;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background-color: #ff5722;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 25px;
+      background: #ffe082;
+      border-left: 5px solid #ff9800;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .extra-info {
+      font-size: 13px;
+      margin-top: 10px;
+      background: #fff8e1;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .share-buttons {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .share-buttons button {
+      margin: 5px;
+      background-color: #4caf50;
+    }
+    #resetBtn {
+      background-color: #9e9e9e;
+      margin-left: 10px;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+    }
+    footer a {
+      color: #e60000;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📜 मज़ेदार दहेज कैलकुलेटर</h1>
+
+  <label>नाम:</label>
+  <input type="text" id="name">
+
+  <label>शिक्षा:</label>
+  <select id="education">
+    <option value="10">10वीं पास</option>
+    <option value="20">B.A./B.Com</option>
+    <option value="25">B.Sc</option>
+    <option value="30">B.Tech/MBA</option>
+    <option value="40">IAS/IPS/Doctor</option>
+    <option value="15">WhatsApp यूनिवर्सिटी</option>
+  </select>
+
+  <label>नौकरी:</label>
+  <select id="job">
+    <option value="10">बेरोजगार (फ्रीलांसर)</option>
+    <option value="20">प्राइवेट नौकरी</option>
+    <option value="30">सरकारी नौकरी</option>
+    <option value="40">विदेश में</option>
+    <option value="25">क्रिप्टो ट्रेडर</option>
+    <option value="12">YouTuber (बिना views)</option>
+    <option value="18">OnlyFans मैनेजर</option>
+    <option value="22">स्टार्टअप CEO (idea pending)</option>
+  </select>
+
+  <label>संपत्ति:</label>
+  <select id="property">
+    <option value="5">सपनों की ज़मीन</option>
+    <option value="15">गाँव में खेत</option>
+    <option value="25">शहर में प्लॉट</option>
+    <option value="30">खुद का घर + खेत</option>
+    <option value="20">भगवान का दिया हुआ सब कुछ है</option>
+    <option value="18">अपने घर का होने वाला मालिक</option>
+    <option value="16">राजा बाबू सपनों में</option>
+    <option value="14">माँ का ज़ेवर</option>
+  </select>
+
+  <label>दिखावट (माँ की नज़र से):</label>
+  <select id="looks">
+    <option value="5">एकदम क़ातिल</option>
+    <option value="4">हीरा बेटा</option>
+    <option value="3">मेरा बाबू</option>
+    <option value="2">आलू जैसा मुँह वाला</option>
+    <option value="1">अरे ग़ज़ब</option>
+    <option value="0">एकदम्मे सुंदर</option>
+  </select>
+
+  <label>खास स्किल:</label>
+  <select id="skill">
+    <option value="10">कलुआ को घोड़ा बनाना</option>
+    <option value="8">रील बनाना</option>
+    <option value="6">मुँह बनाना</option>
+    <option value="4">ख़ाली हँसना</option>
+    <option value="2">चाय मास्टर</option>
+    <option value="1">मोबाइल रिपेयर</option>
+  </select>
+
+  <div id="btnWrapper">
+    <button id="calcBtn" onclick="calculateDahej()">हिसाब लगाओ 💰</button>
+  </div>
+
+  <div id="result" class="result" style="display:none;"></div>
+
+  <div class="share-buttons" id="share" style="display:none;">
+    <button onclick="captureResult()">📷 JPEG में सेव करें</button>
+    <button onclick="downloadAndShare('whatsapp')">📤 WhatsApp</button>
+    <button onclick="downloadAndShare('instagram')">📸 Instagram</button>
+    <button onclick="downloadAndShare('facebook')">📘 Facebook Story</button>
+  </div>
+
+  <footer>
+    © 2025 • Made with ❤️ by <a href="https://designbyram.odoo.com/share-market" target="_blank">Ram</a> • <a href="mailto:devoapphai22@gmail.com">Mail me</a> • <a href="tel:9934189966">Call me</a>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    function calculateDahej() {
+      const name = document.getElementById("name").value || "भाई साहब";
+      const educationEl = document.getElementById("education");
+      const jobEl = document.getElementById("job");
+      const propertyEl = document.getElementById("property");
+      const looksEl = document.getElementById("looks");
+      const skillEl = document.getElementById("skill");
+
+      const education = parseInt(educationEl.value);
+      const job = parseInt(jobEl.value);
+      const property = parseInt(propertyEl.value);
+      const looks = parseInt(looksEl.value);
+      const skill = parseInt(skillEl.value);
+
+      const total = education + job + property + looks + skill;
+      const dahejValue = total * 5000;
+      const goats = Math.floor(total / 10);
+
+      const extraInfo = `
+        <div class='extra-info'>
+          शिक्षा: ${educationEl.options[educationEl.selectedIndex].text}<br>
+          नौकरी: ${jobEl.options[jobEl.selectedIndex].text}<br>
+          संपत्ति: ${propertyEl.options[propertyEl.selectedIndex].text}<br>
+          दिखावट: ${looksEl.options[looksEl.selectedIndex].text}<br>
+          खास स्किल: ${skillEl.options[skillEl.selectedIndex].text}
+        </div>`;
+
+      const message = `
+        <div id="capture">
+          <strong>📜 दहेज रिपोर्ट - ${name}</strong><br><br>
+          अनुमानित दहेज: <strong>₹${dahejValue.toLocaleString()}</strong> + ${goats} बकरियाँ 🐐<br><br>
+          <em>नोट:</em> ये सब हँसी-मज़ाक के लिए है,<br><strong>असली ज़िंदगी में दहेज लेना अपराध है।</strong> ❤️<br><br>
+          ${extraInfo}<br>
+          <small>🌐 Website Owner - <strong>Avinash Yadav</strong></small>
+        </div>`;
+
+      document.getElementById("result").innerHTML = message;
+      document.getElementById("result").style.display = "block";
+      document.getElementById("share").style.display = "block";
+
+      const calcBtn = document.getElementById("calcBtn");
+      calcBtn.textContent = "✅ हिसाब लग गया";
+      calcBtn.style.backgroundColor = "#4caf50";
+
+      if (!document.getElementById("resetBtn")) {
+        const resetBtn = document.createElement("button");
+        resetBtn.textContent = "🔄 Reset";
+        resetBtn.id = "resetBtn";
+        resetBtn.onclick = resetForm;
+        document.getElementById("btnWrapper").appendChild(resetBtn);
+      }
+    }
+
+    function resetForm() {
+      document.getElementById("name").value = "";
+      document.getElementById("education").selectedIndex = 0;
+      document.getElementById("job").selectedIndex = 0;
+      document.getElementById("property").selectedIndex = 0;
+      document.getElementById("looks").selectedIndex = 0;
+      document.getElementById("skill").selectedIndex = 0;
+      document.getElementById("result").style.display = "none";
+      document.getElementById("share").style.display = "none";
+      document.getElementById("calcBtn").textContent = "हिसाब लगाओ 💰";
+      document.getElementById("calcBtn").style.backgroundColor = "#ff5722";
+    }
+
+    function captureResult(callback) {
+      html2canvas(document.getElementById("result")).then(canvas => {
+        if (callback) callback(canvas);
+        else {
+          let link = document.createElement("a");
+          link.download = "dahej_result.jpeg";
+          link.href = canvas.toDataURL("image/jpeg");
+          link.click();
+        }
+      });
+    }
+
+    function downloadAndShare(platform) {
+      captureResult(canvas => {
+        canvas.toBlob(blob => {
+          const file = new File([blob], "dahej_result.jpeg", { type: "image/jpeg" });
+          const shareData = {
+            files: [file],
+            title: 'Dahej Result',
+            text: 'मज़ेदार दहेज रिपोर्ट देखें 😂'
+          };
+          if (navigator.canShare && navigator.canShare(shareData)) {
+            navigator.share(shareData).catch(err => alert('शेयर करने में दिक्कत: ' + err));
+          } else {
+            alert("डिवाइस पर डायरेक्ट शेयर सपोर्ट नहीं करता। पहले फोटो सेव करें 📷");
+          }
+        }, "image/jpeg");
+      });
+    }
+  </script>
+
+</body>
+</html>
